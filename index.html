@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BuddyArena — Growth Proposal: Flywheel, Funnel &amp; Phased GTM</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --black: #0b0e11; --card: #1e2329; --card-2: #2b3139;
+    --yellow: #FCD535; --yellow-dim: rgba(252,213,53,0.10); --yellow-border: rgba(252,213,53,0.22);
+    --white: #ffffff; --muted: #707a8a; --body: #c0c8d4;
+    --green: #0ecb81; --red: #f6465d; --blue: #3b82f6; --orange: #f59e0b;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; line-height: 1.5; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(11,14,17,0.94); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--card-2); padding: 0 48px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { color: var(--yellow); font-weight: 700; font-size: 15px; letter-spacing: .02em; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: var(--muted); font-size: 12.5px; text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-tag { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow-border);
+    padding: 4px 10px; border-radius: 99px; }
+
+  /* LAYOUT */
+  .slide { min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 110px 80px 90px; max-width: 1140px; margin: 0 auto; position: relative; }
+  .section-divider { height: 1px;
+    background: linear-gradient(90deg, transparent, var(--card-2) 20%, var(--card-2) 80%, transparent);
+    max-width: 1140px; margin: 0 auto; }
+  .slide-num { position: absolute; bottom: 40px; right: 80px; font-size: 12px; color: var(--card-2); font-weight: 700; }
+
+  /* TYPE */
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
+  h1 { font-size: 56px; font-weight: 700; line-height: 1.07; letter-spacing: -1.2px; }
+  h2 { font-size: 38px; font-weight: 700; line-height: 1.12; letter-spacing: -.5px; }
+  h3 { font-size: 20px; font-weight: 600; line-height: 1.3; }
+  h4 { font-size: 14px; font-weight: 600; }
+  p  { color: var(--body); font-size: 14px; line-height: 1.65; }
+  .text-yellow { color: var(--yellow); } .text-muted { color: var(--muted); }
+  .text-green { color: var(--green); } .text-red { color: var(--red); }
+  .lead { font-size: 16px; color: var(--body); max-width: 640px; line-height: 1.62; }
+
+  /* CARDS */
+  .card { background: var(--card); border: 1px solid var(--card-2); border-radius: 12px; padding: 22px; }
+  .card-y { background: var(--yellow-dim); border: 1px solid var(--yellow-border); border-radius: 12px; padding: 22px; }
+  .card-hl { background: var(--card); border: 1px solid var(--yellow); border-radius: 12px; padding: 22px; }
+
+  /* GRIDS */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .g4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+  .sp { height: 36px; } .sp-sm { height: 18px; }
+
+  /* HERO */
+  .hero-pill { display: inline-block; background: var(--yellow-dim); border: 1px solid var(--yellow-border);
+    color: var(--yellow); font-size: 11px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 99px; margin-bottom: 26px; }
+  .hero-title { font-size: 62px; font-weight: 700; line-height: 1.05; letter-spacing: -1.6px; margin-bottom: 20px; }
+  .hero-title span { color: var(--yellow); }
+  .hero-sub { font-size: 17px; color: var(--body); max-width: 600px; line-height: 1.6; margin-bottom: 44px; }
+  .stat-row { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
+  .stat-item { display: flex; flex-direction: column; gap: 3px; }
+  .stat-num { font-size: 26px; font-weight: 700; color: var(--yellow); }
+  .stat-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+  .stat-div { width: 1px; height: 34px; background: var(--card-2); }
+
+  /* BADGES */
+  .badge { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 99px; white-space: nowrap; display: inline-block; }
+  .b-green { background: rgba(14,203,129,.1); color: var(--green); border: 1px solid rgba(14,203,129,.28); }
+  .b-yellow{ background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow-border); }
+  .b-red   { background: rgba(246,70,93,.1); color: var(--red); border: 1px solid rgba(246,70,93,.28); }
+  .b-blue  { background: rgba(59,130,246,.1); color: var(--blue); border: 1px solid rgba(59,130,246,.28); }
+  .b-muted { background: rgba(112,122,138,.12); color: var(--muted); border: 1px solid rgba(112,122,138,.3); }
+
+  /* QUOTE */
+  .quote-block { border-left: 3px solid var(--yellow); padding: 14px 22px;
+    background: var(--yellow-dim); border-radius: 0 8px 8px 0; margin: 20px 0; }
+  .quote-block p { color: var(--white); font-size: 15px; font-style: italic; line-height: 1.55; }
+
+  /* TACTIC LIST */
+  .tl { display: flex; flex-direction: column; gap: 8px; }
+  .ti { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--body); line-height: 1.5; }
+  .td { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); margin-top: 7px; flex-shrink: 0; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--card-2); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+  tr:last-child td { border-bottom: 0; }
+  td { color: var(--body); } td b, td strong { color: var(--white); }
+  .tbl-card { background: var(--card); border: 1px solid var(--card-2); border-radius: 12px; overflow: hidden; }
+  .tbl-card th { padding-left: 18px; padding-right: 18px; } .tbl-card td { padding-left: 18px; padding-right: 18px; }
+
+  /* FLYWHEEL */
+  .fw-wrap { display: flex; align-items: center; justify-content: center; gap: 0; margin: 14px 0; flex-wrap: wrap; }
+  .fw-wheel { width: 200px; height: 200px; border-radius: 50%; border: 2px solid var(--card-2);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    background: radial-gradient(circle, rgba(43,49,57,.4) 0%, transparent 70%); flex-shrink: 0; }
+  .fw-wheel.b2c { border-color: var(--blue); }
+  .fw-wheel.b2b { border-color: var(--green); }
+  .fw-wheel-t { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .fw-wheel-s { font-size: 11px; color: var(--muted); line-height: 1.45; padding: 0 22px; }
+  .fw-center { width: 168px; height: 168px; margin: 0 -14px; z-index: 2; flex-shrink: 0;
+    background: var(--yellow-dim); border: 2px solid var(--yellow); border-radius: 18px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .fw-center-t { font-size: 14px; font-weight: 700; color: var(--yellow); line-height: 1.2; padding: 0 14px; }
+  .fw-center-s { font-size: 10.5px; color: var(--body); margin-top: 7px; padding: 0 16px; line-height: 1.4; }
+  .fw-arrow { font-size: 22px; color: var(--yellow); padding: 0 4px; flex-shrink: 0; }
+
+  /* FUNNEL */
+  .funnel-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 8px 0; }
+  .funnel-stage { display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; border-radius: 8px; transition: all .2s; }
+  .f-on   { background: var(--yellow-dim); border: 1px solid var(--yellow-border); }
+  .f-hot  { background: rgba(246,70,93,.12); border: 1px solid var(--red); }
+  .f-dim  { background: rgba(43,49,57,.35); border: 1px solid rgba(43,49,57,.6); }
+  .f-label { font-size: 14px; font-weight: 600; }
+  .f-note  { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .funnel-arrow { text-align: center; color: var(--card-2); font-size: 15px; padding: 2px 0; }
+  .funnel-arrow.y { color: var(--yellow); }
+
+  /* FLOW NODES */
+  .flow-wrap { display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; }
+  .flow-node { flex: 1; min-width: 150px; background: var(--card); border: 1px solid var(--card-2);
+    border-radius: 8px; padding: 15px 16px; text-align: center; }
+  .flow-node.hl { background: var(--yellow-dim); border: 1px solid var(--yellow-border); }
+  .flow-node-t { font-size: 12.5px; font-weight: 700; margin-bottom: 4px; }
+  .flow-node-s { font-size: 10.5px; color: var(--muted); line-height: 1.4; }
+  .flow-arr { color: var(--yellow); font-size: 16px; padding: 0 7px; display: flex; align-items: center; flex-shrink: 0; }
+
+  /* PHASE */
+  .phase-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 7px; }
+  .phase-time { font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+  .ch-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 9px; }
+  .ch-title { font-size: 17px; font-weight: 700; margin-bottom: 7px; }
+  .ch-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+
+  /* TIMELINE STRIP */
+  .tline { display: flex; gap: 8px; margin: 10px 0; }
+  .tline-cell { flex: 1; border-radius: 10px; padding: 14px 12px; background: var(--card); border: 1px solid var(--card-2); text-align: center; }
+  .tline-cell.hl { background: var(--yellow-dim); border-color: var(--yellow-border); }
+  .tline-w { font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+  .tline-cell.hl .tline-w { color: var(--yellow); }
+  .tline-t { font-size: 12.5px; font-weight: 700; line-height: 1.3; }
+  .tline-s { font-size: 10.5px; color: var(--muted); margin-top: 5px; line-height: 1.4; }
+
+  /* WEEK HEARTBEAT */
+  .beat { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .beat-cell { background: var(--card); border: 1px solid var(--card-2); border-radius: 10px; padding: 14px; }
+  .beat-cell.hot { background: rgba(252,213,53,.14); border-color: var(--yellow); }
+  .beat-day { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); margin-bottom: 6px; }
+  .beat-t { font-size: 12.5px; font-weight: 700; margin-bottom: 4px; }
+  .beat-s { font-size: 10.5px; color: var(--muted); line-height: 1.45; }
+
+  @media (max-width: 880px) { .tline { flex-direction: column; } .beat { grid-template-columns: 1fr; } }
+
+  .footer { max-width: 1140px; margin: 0 auto; padding: 36px 80px 60px; color: var(--muted); font-size: 12px; }
+  @media (max-width: 880px) {
+    nav { padding: 0 20px; } .nav-links { display: none; }
+    .slide { padding: 90px 22px 70px; } .slide-num { right: 22px; }
+    .g2, .g3, .g4 { grid-template-columns: 1fr; } .hero-title { font-size: 40px; }
+    h2 { font-size: 28px; } .fw-center { margin: -14px 0; } .footer { padding: 30px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">BuddyArena</div>
+  <div class="nav-links">
+    <a href="#bet">The Bet</a>
+    <a href="#engine">Two Wheels</a>
+    <a href="#attract">Attract</a>
+    <a href="#funnel">Funnel</a>
+    <a href="#retain">Retain</a>
+    <a href="#scale">Scale</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#yellow">Yellow Run</a>
+    <a href="#dev">Dev Asks</a>
+    <a href="#kpis">KPIs</a>
+  </div>
+  <div class="nav-tag">Draft · Jun 2026</div>
+</nav>
+
+<!-- HERO -->
+<div class="slide">
+  <div class="hero-pill">Growth Proposal · MVP Phase (Month 1–2)</div>
+  <div class="hero-title">Flywheel, Funnel &amp;<br><span>phased go-to-market.</span></div>
+  <p class="hero-sub">We don't have a big network to pull users from yet. So we won't burn energy chasing strangers — we <b class="text-yellow">make every user touchpoint count</b>: bring people in through partners we know, keep them trading week after week, and turn them into people who bring their friends.</p>
+  <div class="stat-row">
+    <div class="stat-item"><div class="stat-num">50</div><div class="stat-lbl">Active traders — the real target</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">Volume</div><div class="stat-lbl">Real volume we can prove</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">2</div><div class="stat-lbl">Wheels that feed each other (B2C × B2B)</div></div>
+    <div class="stat-div"></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Phases — each one earns the next</div></div>
+  </div>
+  <span class="slide-num">00</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- TL;DR -->
+<div class="slide" id="tldr">
+  <div class="eyebrow">TL;DR</div>
+  <h2>The plan in <span class="text-yellow">three answers.</span></h2>
+  <div class="sp"></div>
+  <div class="g3" style="align-items:start;">
+    <div class="card-hl">
+      <div class="ch-num">01 · Bring users in</div>
+      <div class="ch-title">Start warm, not cold</div>
+      <p style="font-size:13px;">No user base, no ad budget — so we don't chase strangers. We start with people our partners can already reach (Yellow.Pro first, Aster next) and build the product so traders bring their friends. Three simple channels seed the first group. Target: <b class="text-yellow">50 real, active traders</b> — not a big signup number.</p>
+    </div>
+    <div class="card-hl">
+      <div class="ch-num">02 · Keep them</div>
+      <div class="ch-title">Build for the comeback</div>
+      <p style="font-size:13px;">One trader who returns every week is worth more than eight who try once. Weekly rounds (epochs) build the habit. Three features Cede Hub doesn't have — <b class="text-yellow">Telegram reminders, a live leaderboard anyone can watch without logging in, and a last-hour bonus</b> — pull traders back and put us in front of their friends at the same time.</p>
+    </div>
+    <div class="card-hl">
+      <div class="ch-num">03 · Grow from there</div>
+      <div class="ch-title">Each campaign sells the next</div>
+      <p style="font-size:13px;">Traders create volume. That volume — <b class="text-yellow">real and provable</b> — is what convinces the next client to fund a prize pool. Every finished campaign becomes a case study; every case study wins the next client; every new client brings their own community of traders. That's the flywheel.</p>
+    </div>
+  </div>
+  <span class="slide-num">TL;DR</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 1. THE BET -->
+<div class="slide" id="bet">
+  <div class="eyebrow">Section 1 · The Strategic Bet</div>
+  <h2>Start from where we really are — <span class="text-yellow">said honestly.</span></h2>
+  <div class="sp-sm"></div>
+  <p class="lead">This isn't a launch from strength. Naming the limits plainly is the only way to build a plan that survives the real world.</p>
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="card">
+      <h4 style="margin-bottom:14px;">Where we actually stand</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">We only track trades</b> — the app watches volume on Binance/MEXC, it can't trade for anyone. No bot, no vouchers → the <b class="text-yellow">prize pool</b> is the only reason to join.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">No users yet</b> — every early trader must come through someone else's network.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">No exchange deal yet</b> — we haven't applied for affiliate programs; the "easy money" campaigns can't run yet.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Small, slow budget</b> — ~$2K pool to start; Yellow decision-makers move slowly.</span></div>
+      </div>
+    </div>
+    <div class="card-y">
+      <h4 style="margin-bottom:10px;" class="text-yellow">The bet: make every touchpoint count</h4>
+      <p style="font-size:13px; margin-bottom:14px;">Since we can't pull strangers in at scale, we do the opposite: bring people in through warm partner networks, polish every step they take inside the product, keep them coming back — and make sharing so easy they spread us themselves.</p>
+      <div class="quote-block" style="margin:0;">
+        <p>We don't have an audience. We have a partner with an audience — and a product built to make that audience share itself.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sp"></div>
+  <div class="g3">
+    <div class="card"><span class="badge b-red">Will not</span><h4 style="margin:10px 0 6px;">Run paid ads</h4><p style="font-size:12px;">No budget — and paid traffic to an unknown product converts into nothing.</p></div>
+    <div class="card"><span class="badge b-red">Will not</span><h4 style="margin:10px 0 6px;">Fake the volume</h4><p style="font-size:12px;">Bot or wash volume would destroy partner trust for good. If a pool underperforms, we extend the window — we never fake activity.</p></div>
+    <div class="card"><span class="badge b-red">Will not</span><h4 style="margin:10px 0 6px;">Spam channels</h4><p style="font-size:12px;">Mass-dropping links gets us banned and looks desperate. We go through warm, partner-backed intros instead.</p></div>
+  </div>
+  <div class="sp-sm"></div>
+  <div class="card" style="border-color:var(--orange);">
+    <h4 style="margin-bottom:6px;color:var(--orange);">The pool problem, said out loud</h4>
+    <p style="font-size:13px;">Split $2K across ~8 weekly winners and each prize is $50–150. That's real money for an active retail trader — but nothing for a whale. So at $2K we aim for <b class="text-yellow">active retail traders</b>, and we push for a <b class="text-yellow">$5–10K pool as a condition for launch</b>: below a believable minimum, the campaign isn't worth running.</p>
+  </div>
+  <span class="slide-num">01</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 2. TWO-ENGINE MODEL -->
+<div class="slide" id="engine">
+  <div class="eyebrow">Section 2 · How Growth Works Here</div>
+  <h2>Two wheels that <span class="text-yellow">feed each other.</span></h2>
+  <div class="sp-sm"></div>
+  <p class="lead">Traders create volume. Provable volume wins the next client. That client brings their own community of traders. The thing connecting the two wheels is <b class="text-yellow">volume we can prove</b> — not a user count.</p>
+  <div class="sp"></div>
+  <div class="fw-wrap">
+    <div class="fw-wheel b2c">
+      <div class="fw-wheel-t" style="color:var(--blue);">B2C</div>
+      <div class="fw-wheel-s">traders → volume → bigger pools → more sharing → more traders</div>
+    </div>
+    <div class="fw-arrow">⇄</div>
+    <div class="fw-center">
+      <div class="fw-center-t">REAL, PROVABLE VOLUME</div>
+      <div class="fw-center-s">measured on our servers, wash trading filtered out — the one thing both wheels need</div>
+    </div>
+    <div class="fw-arrow">⇄</div>
+    <div class="fw-wheel b2b">
+      <div class="fw-wheel-t" style="color:var(--green);">B2B</div>
+      <div class="fw-wheel-s">campaigns → results → next client → their community → new traders</div>
+    </div>
+  </div>
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="tbl-card">
+      <table>
+        <tr><th></th><th>Looks good, sells nothing</th><th>What actually sells</th></tr>
+        <tr><td><b>B2C</b></td><td class="text-muted">Total signups</td><td>Traders who come back week after week</td></tr>
+        <tr><td><b>B2B</b></td><td class="text-muted">Logo count</td><td><b class="text-yellow">Real volume per campaign, provable</b></td></tr>
+      </table>
+    </div>
+    <div class="card-y">
+      <h4 class="text-yellow" style="margin-bottom:8px;">The sharing loop — and its honest limit</h4>
+      <p style="font-size:12.5px; margin-bottom:10px;">top trader earns → shares their card → a friend joins → volume goes up → the pool looks bigger → more people compete harder → more sharing.</p>
+      <p style="font-size:12.5px;">With only 50 traders, sharing won't flood us with new users yet — what it does is <b style="color:#fff">show outsiders the competition is real</b>. It becomes a true growth driver in Phase 2–3, once there are enough traders sharing. We build it now because it's cheap and it compounds.</p>
+    </div>
+  </div>
+  <span class="slide-num">02</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 3. ATTRACT -->
+<div class="slide" id="attract">
+  <div class="eyebrow">Section 3 · How We Bring Users In</div>
+  <h2>Start warm. <span class="text-yellow">Let the product do the spreading.</span></h2>
+  <div class="sp-sm"></div>
+  <p class="lead">Every Phase-1 trader should arrive through a relationship we already hold — Yellow's, then Aster's — never a cold drop into a random group.</p>
+  <div class="sp"></div>
+
+  <h4 style="margin-bottom:12px;">Two kinds of campaigns</h4>
+  <div class="tbl-card">
+    <table>
+      <tr><th></th><th>Tier 1 — "Easy Money"</th><th>Tier 2 — "Partner"</th></tr>
+      <tr><td><b>Job</b></td><td>Bring new users in</td><td>Deliver value to paying clients</td></tr>
+      <tr><td><b>Paid for by</b></td><td>A small float first; <b class="text-yellow">exchange commission refills it later</b></td><td><b>Token issuer / Yellow</b></td></tr>
+      <tr><td><b>How it feels</b></td><td>Easy to join, easy to win, many small rounds</td><td>Bigger prizes, higher stakes</td></tr>
+      <tr><td><b>When</b></td><td><span class="badge b-muted">Comes in Phase 2</span> — needs affiliate approval first</td><td><span class="badge b-green">Live in Phase 1 (Yellow)</span></td></tr>
+    </table>
+  </div>
+  <div class="sp-sm"></div>
+  <div class="card" style="border-color:var(--orange);">
+    <p style="font-size:12.5px;"><b style="color:var(--orange);">The catch, and how we handle it:</b> exchange commission can't fund a pool until volume is high — but volume needs a pool first. So we <b class="text-yellow">seed the first easy-money rounds from a small float</b> or leftover partner budget; commission then refills the <b>next</b> round. Commission never pays for the first one. A <b class="text-yellow">cross-campaign bonus</b> (join 2+ campaigns → earn extra) then moves these traders into the partner campaigns clients pay for.</p>
+  </div>
+
+  <div class="sp"></div>
+  <h4 style="margin-bottom:12px;">Three channels — small on purpose</h4>
+  <div class="g3" style="align-items:start;">
+    <div class="card-hl">
+      <div class="ch-num">Channel 01</div>
+      <div class="ch-title">Telegram (targeted)</div>
+      <div class="ch-sub">Person-to-person, never broadcast. An unknown project dropping links into official groups gets banned fast.</div>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Warm intros via Yellow/Aster into <i>their</i> groups; direct messages to traders we can identify.</span></div>
+        <div class="ti"><div class="td"></div><span>Say: "we're running a competition, early access, feedback welcome" — never "join our platform."</span></div>
+        <div class="ti"><div class="td"></div><span><b class="text-yellow">If it flops:</b> fewer than a handful of real contacts in week 1 → move those hours to Channel 03.</span></div>
+      </div>
+    </div>
+    <div class="card-hl">
+      <div class="ch-num">Channel 02</div>
+      <div class="ch-title">X / Twitter</div>
+      <div class="ch-sub">For trust, not follower counts. Post steadily even when reach is low.</div>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Comment on relevant trading posts.</span></div>
+        <div class="ti"><div class="td"></div><span>A running chain of updates each round: winners, stats.</span></div>
+        <div class="ti"><div class="td"></div><span>Trader spotlights + a plain-English "how your prize is calculated" post.</span></div>
+      </div>
+    </div>
+    <div class="card-hl">
+      <div class="ch-num">Channel 03 · best return</div>
+      <div class="ch-title">Partner communities</div>
+      <div class="ch-sub">Our team helps the partner post campaign messages into their own community.</div>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Several messages: the campaign itself + the extra reward for joining more than one.</span></div>
+        <div class="ti"><div class="td"></div><span>A partner posting to their own audience reaches an estimated <b class="text-yellow">3–6×</b> more than we can alone.</span></div>
+        <div class="ti"><div class="td"></div><span>This is the channel we lead with.</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">03</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 4. FUNNEL -->
+<div class="slide" id="funnel">
+  <div class="eyebrow">Section 4 · The User Funnel</div>
+  <h2>Few visitors, so <span class="text-yellow">every step must convert.</span></h2>
+  <div class="sp-sm"></div>
+  <div class="quote-block">
+    <p>Our funnel doesn't leak at the top — we never pour in cold traffic. It leaks in the middle: at the API key step, and right after the first trade when nothing confirms it counted. Fix the middle, or the warm traffic we worked for drains out unseen.</p>
+  </div>
+  <div class="sp-sm"></div>
+  <div class="funnel-wrap">
+    <div class="funnel-stage f-on" style="width:70%;"><div><div class="f-label text-yellow">1 · Land</div><div class="f-note">A warm visitor needs a credible first page — landing page (already locked, to build)</div></div><span class="badge b-yellow">to build</span></div>
+    <div class="funnel-arrow y">↓</div>
+    <div class="funnel-stage f-on" style="width:78%;"><div><div class="f-label text-yellow">2 · Understand</div><div class="f-note">"We track your trades, we don't trade for you" — make the prize pool the hero</div></div><span class="badge b-yellow">messaging</span></div>
+    <div class="funnel-arrow y">↓</div>
+    <div class="funnel-stage f-on" style="width:86%;"><div><div class="f-label text-yellow">3 · Trust</div><div class="f-note">"Is my API key safe?" = the #1 worry. Read-only · encrypted · fixed IP they can whitelist</div></div><span class="badge b-yellow">trust copy</span></div>
+    <div class="funnel-arrow y">↓</div>
+    <div class="funnel-stage f-hot" style="width:100%;"><div><div class="f-label text-red">4 · Connect — THE BIG DROP-OFF</div><div class="f-note">Creating the exchange API key is fiddly and we have no step-by-step guide yet. The single best fix in the funnel.</div></div><span class="badge b-red">⚑ fix first</span></div>
+    <div class="funnel-arrow y">↓</div>
+    <div class="funnel-stage f-hot" style="width:100%;"><div><div class="f-label text-red">5 · First trade counted — THE SILENT DROP-OFF</div><div class="f-note">Nothing tells the user "we see your trade." They think it's broken and leave. Check timing with Product.</div></div><span class="badge b-red">⚑ fix first</span></div>
+    <div class="funnel-arrow y">↓</div>
+    <div class="funnel-stage f-on" style="width:86%;"><div><div class="f-label text-yellow">6 · Active</div><div class="f-note">The quiet gap between rounds is where people drift off → winner post + "next round starts in Xh" in one message</div></div><span class="badge b-yellow">cadence</span></div>
+    <div class="funnel-arrow y">↓</div>
+    <div class="funnel-stage f-on" style="width:78%;"><div><div class="f-label text-yellow">7 · Advocate → brings the next trader in</div><div class="f-note">Share card for everyone · live leaderboard link · referral paid only after a full round</div></div><span class="badge b-green">the loop</span></div>
+  </div>
+  <div class="sp-sm"></div>
+  <p style="font-size:12.5px; text-align:center; color:var(--muted);">A funnel that ends at "Active" is a leaky bucket; one that ends at <b class="text-yellow">"Advocate"</b> feeds itself. The four gaps (no landing page, no key guide, no trade confirmation, no between-round hook) sit in Duy's feature work next week — <b style="color:#fff">confirm with Product</b>, none needs new infrastructure.</p>
+  <span class="slide-num">04</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 5. RETAIN -->
+<div class="slide" id="retain">
+  <div class="eyebrow">Section 5 · How We Keep Them</div>
+  <h2>Build for the comeback, <span class="text-yellow">not the signup.</span></h2>
+  <div class="sp-sm"></div>
+  <div class="quote-block"><p>One trader returning eight weeks is worth more than eight one-time joiners.</p></div>
+  <div class="sp-sm"></div>
+  <div class="tbl-card">
+    <table>
+      <tr><th>Feature</th><th>What it does</th><th>Why it keeps people</th><th>Cede?</th></tr>
+      <tr><td><b>Weekly rounds (epochs)</b></td><td>Splits the 60-day campaign into weekly rounds, each with its own winners</td><td>Weekly urgency + habit; missed week 1 → still join week 2</td><td><span class="badge b-green">our edge</span></td></tr>
+      <tr><td><b>Share card — for everyone</b></td><td>"I traded $Xk, ranked #Y of N" card for every participant, not just the winner</td><td>Everyone has a reason to post → more people discover us</td><td><span class="badge b-red">No</span></td></tr>
+      <tr><td><b>Top-10 Telegram message</b></td><td>"You're #4, est. $127, closes in 5h" — sent via the Telegram login we already have</td><td>Pulls ranked traders back before the round ends; nothing new to build</td><td><span class="badge b-red">No</span></td></tr>
+      <tr><td><b>Gap-closing post</b></td><td>Winner reveal + "next round starts in Xh" in one message</td><td>The quiet gap between rounds never gets a chance to break the habit</td><td><span class="badge b-red">No</span></td></tr>
+      <tr><td><b>Referral, paid after a full round</b></td><td>~$5–10 each side, paid only when the invited user finishes a whole round</td><td>Rewards real invites, blocks farming — the new user runs a full loop before anyone gets paid</td><td><span class="badge b-red">No</span></td></tr>
+      <tr><td><b>Last-hour bonus</b></td><td>Top trader of the final hour earns extra on top of their normal reward</td><td>A dramatic finish every week — pushes hard trading at the close + gives us a story to post</td><td><span class="badge b-red">No</span></td></tr>
+    </table>
+  </div>
+  <div class="sp"></div>
+  <h4 style="margin-bottom:12px;">The three features Cede Hub doesn't have</h4>
+  <div class="g3">
+    <div class="card-hl"><h4 class="text-yellow" style="margin-bottom:7px;">① Telegram reminders</h4><p style="font-size:12.5px;">Personal "you're 4th, 5h left" messages — using the Telegram login we already have. Nothing new to build.</p></div>
+    <div class="card-hl"><h4 class="text-yellow" style="margin-bottom:7px;">② Watch-live leaderboard</h4><p style="font-size:12.5px;">A public link anyone can open without an account — "watch me compete live." The leaderboard becomes the ad.</p></div>
+    <div class="card-hl"><h4 class="text-yellow" style="margin-bottom:7px;">③ Last-hour bonus</h4><p style="font-size:12.5px;">Every round ends with a sprint instead of fading out. Drama people share.</p></div>
+  </div>
+  <div class="sp-sm"></div>
+  <p style="font-size:12.5px; color:var(--muted);"><b style="color:#fff">If early weeks look thin</b> (the same few names winning small amounts), switch to bi-weekly rounds so each winner post has more substance. Community: a Telegram announce channel (no moderation needed) + a chat group — promote a top trader to moderator at ~100 members.</p>
+  <span class="slide-num">05</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 6. SCALE -->
+<div class="slide" id="scale">
+  <div class="eyebrow">Section 6 · How We Grow (B2B + B2C)</div>
+  <h2>Every campaign makes the next one <span class="text-yellow">easier to sell.</span></h2>
+  <div class="sp-sm"></div>
+  <p class="lead">The company priority is revenue — more token owners funding prize pools. What convinces them is one thing: real results from the last campaign.</p>
+  <div class="sp"></div>
+  <div class="flow-wrap">
+    <div class="flow-node hl"><div class="flow-node-t text-yellow">Partner campaign</div><div class="flow-node-s">Yellow first</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node"><div class="flow-node-t">Real volume</div><div class="flow-node-s">+ trader count</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node"><div class="flow-node-t">Case study</div><div class="flow-node-s">shared in token-project circles</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node"><div class="flow-node-t">Next client funds a pool</div><div class="flow-node-s">brings their community</div></div>
+    <div class="flow-arr">→</div>
+    <div class="flow-node hl"><div class="flow-node-t text-yellow">Cross-campaign bonus</div><div class="flow-node-s">moves easy-money traders in</div></div>
+    <div class="flow-arr">↺</div>
+  </div>
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="card">
+      <h4 style="margin-bottom:10px;">The "Partners" page — an easy front door for clients</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Trading Competition</b> — a ready-made campaign with weekly rounds and all the retention features. Built already.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Trading Volume Provider</b> — open, contracted market-making using Buddy Trading's existing bot engine, for projects that must hold a volume level to keep their exchange listing.</span></div>
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--red);">
+      <h4 style="margin-bottom:8px;color:var(--red);">The line we draw — said before anyone asks</h4>
+      <p style="font-size:12.5px;">The volume-provider service is <b style="color:#fff">openly disclosed market-making for the client's own token</b> — and it stays <b style="color:#fff">completely separate from competition leaderboards</b>. Competition volume is always from real traders, measured on our servers, never from bots. We never sell the two as the same thing. When a client asks "your competitions are real but you also sell bot volume?" — the answer is already written on the page.</p>
+    </div>
+  </div>
+  <div class="sp-sm"></div>
+  <div class="card-y">
+    <p style="font-size:12.5px;"><b class="text-yellow">If our first number is small:</b> we tell the value-for-money story — how much real volume each prize dollar bought, what one verified trader cost — instead of a size story we'd lose against Cede Hub's $1B+.</p>
+  </div>
+  <span class="slide-num">06</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 7. ROADMAP -->
+<div class="slide" id="roadmap">
+  <div class="eyebrow">Section 7 · Phased Roadmap</div>
+  <h2>Each phase has to <span class="text-yellow">earn the next one.</span></h2>
+  <div class="sp-sm"></div>
+  <p class="lead"><b style="color:#fff">Build and launch on separate clocks:</b> we ship everything that doesn't depend on Yellow now, so a slow sign-off delays the campaign — not the product.</p>
+  <div class="sp"></div>
+  <div class="g3" style="align-items:start;">
+    <div class="card-hl">
+      <div class="phase-num">Phase 1 · Prove it</div>
+      <div class="phase-time">Month 1–2</div>
+      <h4 style="margin-bottom:10px;">One real result for Yellow</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Yellow campaign, 60 days → weekly rounds</span></div>
+        <div class="ti"><div class="td"></div><span>All retention features + social launch (X + Telegram)</span></div>
+        <div class="ti"><div class="td"></div><span>The 3 channels</span></div>
+        <div class="ti"><div class="td"></div><span>Apply for exchange affiliate programs <i>now</i></span></div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--card-2);"><span class="badge b-green">Done when: volume target + 50 active traders + people coming back</span></div>
+    </div>
+    <div class="card">
+      <div class="phase-num">Phase 2 · Repeat &amp; earn</div>
+      <div class="phase-time">Month 2–4</div>
+      <h4 style="margin-bottom:10px;">A second result + the first self-running engine</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Aster + a second token client</span></div>
+        <div class="ti"><div class="td"></div><span>Easy-money campaigns go live <i>after</i> affiliate approval (seeded from a float first)</span></div>
+        <div class="ti"><div class="td"></div><span>Referral + cross-campaign bonus switch on</span></div>
+        <div class="ti"><div class="td"></div><span>Publish the first case study</span></div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--card-2);"><span class="badge b-muted">Waits for: affiliate approval + Phase-1 results</span></div>
+    </div>
+    <div class="card">
+      <div class="phase-num">Phase 3 · Scale</div>
+      <div class="phase-time">Month 4+</div>
+      <h4 style="margin-bottom:10px;">Several campaigns at once + clients coming to us</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Multiple campaigns running in parallel</span></div>
+        <div class="ti"><div class="td"></div><span>Self-serve Partners page</span></div>
+        <div class="ti"><div class="td"></div><span>Content / SEO / press in the spaces Cede Hub ignores (Reddit, YouTube, crypto media)</span></div>
+        <div class="ti"><div class="td"></div><span>KOLs — last, once the numbers can carry the spend</span></div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--card-2);"><span class="badge b-muted">Waits for: results that compound</span></div>
+    </div>
+  </div>
+  <span class="slide-num">07</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 8. YELLOW RUN -->
+<div class="slide" id="yellow">
+  <div class="eyebrow">Section 8 · If We Run It With Yellow.Pro</div>
+  <h2>What 60 days with Yellow.Pro <span class="text-yellow">actually looks like.</span></h2>
+  <div class="sp-sm"></div>
+  <p class="lead">Yellow.Pro brings the first warm audience and the prize pool. We bring the platform, the weekly rhythm, and the content. Week by week:</p>
+  <div class="sp"></div>
+
+  <div class="tline">
+    <div class="tline-cell hl"><div class="tline-w">Week 0</div><div class="tline-t">Prep</div><div class="tline-s">Landing page live · channels open · Yellow.Pro announces to their users</div></div>
+    <div class="tline-cell hl"><div class="tline-w">Week 1</div><div class="tline-t">Launch round</div><div class="tline-s">First traders connect · first winner post goes out</div></div>
+    <div class="tline-cell"><div class="tline-w">Week 2–3</div><div class="tline-t">Build the habit</div><div class="tline-s">Winners come back · share cards circulate · Telegram group warms up</div></div>
+    <div class="tline-cell hl"><div class="tline-w">Week 4</div><div class="tline-t">Milestone post</div><div class="tline-s">"$X traded · N traders · $Y paid out" — the biggest-reach post of the run</div></div>
+    <div class="tline-cell"><div class="tline-w">Week 5–7</div><div class="tline-t">Compound</div><div class="tline-s">Trader spotlights · friends join via shared cards · steady winner cadence</div></div>
+    <div class="tline-cell hl"><div class="tline-w">Week 8</div><div class="tline-t">Finale + case study</div><div class="tline-s">Final winners · full results written up → the asset that sells client #2</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <h4 style="margin-bottom:12px;">The weekly heartbeat — same rhythm, every round</h4>
+  <div class="beat">
+    <div class="beat-cell"><div class="beat-day">Monday</div><div class="beat-t">Round opens</div><div class="beat-s">Launch post on X + Telegram. Tag Yellow.Pro.</div></div>
+    <div class="beat-cell"><div class="beat-day">Midweek</div><div class="beat-t">Leaderboard update</div><div class="beat-s">Standings post + Telegram nudges to the top 10.</div></div>
+    <div class="beat-cell hot"><div class="beat-day">Friday · last hour</div><div class="beat-t">The sprint</div><div class="beat-s">Last-hour bonus chase. Final push in Telegram. The dramatic close.</div></div>
+    <div class="beat-cell"><div class="beat-day">Friday · close</div><div class="beat-t">One message, two jobs</div><div class="beat-s">Winners revealed + "next round opens Monday" — the gap never goes quiet.</div></div>
+    <div class="beat-cell"><div class="beat-day">Weekend</div><div class="beat-t">Cards travel</div><div class="beat-s">Every participant gets a share card. Spotlight the best story of the week.</div></div>
+  </div>
+
+  <div class="sp"></div>
+  <div class="card-y">
+    <h4 class="text-yellow" style="margin-bottom:8px;">Example math — not a promise (real targets get set with Yellow before launch)</h4>
+    <p style="font-size:13px;">A $5K pool → ~$600 per weekly round. If 50 active traders average $40K of counted volume a week, that's ~$2M/week → <b style="color:#fff">~$16M of real, provable volume over the run</b>. Yellow would be paying about <b class="text-yellow">$0.30 per $1,000 of real volume</b> — that value-for-money line is the headline of the case study.</p>
+  </div>
+  <div class="sp-sm"></div>
+  <div class="g2">
+    <div class="card">
+      <h4 style="margin-bottom:12px;">What Yellow.Pro gets</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>A volume number they can <b style="color:#fff">prove</b> — measured on our servers, wash trading filtered out.</span></div>
+        <div class="ti"><div class="td"></div><span>8 weeks of public competition content around their brand.</span></div>
+        <div class="ti"><div class="td"></div><span>Their users coming back weekly — every round is a reason to return.</span></div>
+        <div class="ti"><div class="td"></div><span>The case study to show exchanges and partners.</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h4 style="margin-bottom:12px;">What BuddyArena gets</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Our first <b style="color:#fff">50 real traders</b> — plus data on who comes back and why.</span></div>
+        <div class="ti"><div class="td"></div><span>A tested weekly playbook we re-run for every next client.</span></div>
+        <div class="ti"><div class="td"></div><span>The case study that wins client #2.</span></div>
+        <div class="ti"><div class="td"></div><span>A content library: 8 winner stories, a milestone, spotlights.</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-num">08</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 9. DEV ASKS -->
+<div class="slide" id="dev">
+  <div class="eyebrow">Section 9 · Marketing Features Required From Dev</div>
+  <h2>The build list for Duy — <span class="text-yellow">by priority.</span></h2>
+  <div class="sp-sm"></div>
+  <p class="lead">Duy starts marketing features next week. <b style="color:#fff">P0 must exist before the Yellow campaign opens.</b> P1 lands during the run. P2 is Phase 2. None of it needs new infrastructure.</p>
+  <div class="sp"></div>
+  <div class="tbl-card">
+    <table>
+      <tr><th style="width:70px;">Priority</th><th>Feature</th><th>What it does</th><th style="width:110px;">Needed by</th></tr>
+      <tr><td><span class="badge b-red">P0</span></td><td><b>Landing page</b></td><td>The credible first page — leads with Yellow as first client + the live leaderboard. Copy from Maddy (already locked top-priority).</td><td>Week 0</td></tr>
+      <tr><td><span class="badge b-red">P0</span></td><td><b>API-key guide in the connect step</b></td><td>Step-by-step with Binance screenshots: read-only scope + our fixed IP to whitelist. The single best funnel fix.</td><td>Week 0</td></tr>
+      <tr><td><span class="badge b-red">P0</span></td><td><b>"We see your trades" confirmation</b></td><td>At connect: "we're watching your account — trades count from now." Check detection timing with the API team first.</td><td>Week 0</td></tr>
+      <tr><td><span class="badge b-red">P0</span></td><td><b>Share card for everyone</b></td><td>A "ranked #Y of N with $Xk volume" image for every participant, every round — not just the winner.</td><td>Week 1</td></tr>
+      <tr><td><span class="badge b-yellow">P1</span></td><td><b>Top-10 Telegram message</b></td><td>"You're #4, est. $127, closes in 5h" — uses the Telegram login we already have.</td><td>Week 1–2</td></tr>
+      <tr><td><span class="badge b-yellow">P1</span></td><td><b>Winner stats per round</b></td><td>Auto-export each round's numbers (winners, volume, payouts) so the winner post takes minutes, not hours.</td><td>Week 1</td></tr>
+      <tr><td><span class="badge b-yellow">P1</span></td><td><b>Watch-live leaderboard link</b></td><td>The public leaderboard, openable without an account — "watch me compete live."</td><td>Week 2</td></tr>
+      <tr><td><span class="badge b-yellow">P1</span></td><td><b>Last-hour bonus</b></td><td>Extra reward for the top trader of each round's final hour. Needs the funding decision (~10% of pool) first.</td><td>Week 2</td></tr>
+      <tr><td><span class="badge b-muted">P2</span></td><td><b>Referral</b></td><td>~$5–10 each side, paid only after the invited user finishes a full round.</td><td>Month 2</td></tr>
+      <tr><td><span class="badge b-muted">P2</span></td><td><b>Cross-campaign bonus</b></td><td>Extra reward for joining 2+ campaigns — moves easy-money traders into partner campaigns.</td><td>Month 2</td></tr>
+      <tr><td><span class="badge b-muted">P2</span></td><td><b>Partners page</b></td><td>"Partners" nav button → two boxes: Trading Competition + Trading Volume Provider.</td><td>Month 2–3</td></tr>
+    </table>
+  </div>
+  <div class="sp-sm"></div>
+  <p style="font-size:12.5px; color:var(--muted);"><b style="color:#fff">Sequencing logic:</b> P0 fixes the two funnel stages where warm traffic drains out (the API key + the silent first trade). P1 powers the weekly heartbeat. P2 turns one campaign into a system.</p>
+  <span class="slide-num">09</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 10. KPIs -->
+<div class="slide" id="kpis">
+  <div class="eyebrow">Section 10 · KPIs &amp; Open Decisions</div>
+  <h2>Measure what sells the next client — <span class="text-yellow">not what looks good.</span></h2>
+  <div class="sp-sm"></div>
+  <div class="quote-block"><p>We're not pouring everything into user acquisition — we don't have the network for it. We make every touchpoint work, keep traders coming back, and let them advocate for us. If Phase 1 ends with one trustworthy volume number and traders who came back, it worked — even if the follower count never moved.</p></div>
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="card">
+      <h4 style="margin-bottom:12px;" class="text-green">We measure</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Real volume (the number X)</b> — one defensible USDT figure, measured on our servers, above a minimum we set before launch.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">50 genuine active traders</b> — "active" = real counted volume in at least one weekly round.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Comebacks</b> — traders active in one round who return for the next.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Posting discipline</b> — did the full posting sequence run every round.</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h4 style="margin-bottom:12px;" class="text-red">We don't measure</h4>
+      <div class="tl">
+        <div class="ti"><div class="td" style="background:var(--red);"></div><span><b style="color:#fff">Raw signups</b> — a signup that never trades proves nothing.</span></div>
+        <div class="ti"><div class="td" style="background:var(--red);"></div><span><b style="color:#fff">Follower counts</b> — posting is for trust, not a scoreboard.</span></div>
+        <div class="ti"><div class="td" style="background:var(--red);"></div><span><b style="color:#fff">Easy-money campaign numbers</b> — that engine belongs to Phase 2.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="sp"></div>
+  <h4 style="margin-bottom:12px;">Open decisions — each needs an owner and a date</h4>
+  <div class="tbl-card">
+    <table>
+      <tr><th>Decision</th><th>Our lean</th><th>Owner</th></tr>
+      <tr><td><b>Last-hour bonus money</b></td><td>Take ~10% from the main pool (simplest); revisit at $5–10K pools</td><td>Us + Yellow</td></tr>
+      <tr><td><b>Pool size</b> <span class="badge b-yellow">blocker</span></td><td>Push $2K → $5–10K; treat it as a condition for launch, not a wish</td><td>BD → Yellow</td></tr>
+      <tr><td><b>Aster</b></td><td>Only if their token trades on a CEX; building DEX tracking would compete with finishing the MVP</td><td>BD (Aster)</td></tr>
+      <tr><td><b>Exchange affiliate</b></td><td>Apply now; until approved, seed easy-money rounds from a float</td><td>BD / ops</td></tr>
+      <tr><td><b>Yellow's pace</b> <span class="badge b-yellow">blocker</span></td><td>Set a hard yes/no date; if missed → Aster or a small self-funded pilot</td><td>BD lead</td></tr>
+    </table>
+  </div>
+  <span class="slide-num">10</span>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="footer">
+  BuddyArena — Growth Proposal · Draft for team feedback · Owner: Maddy · Updated 2026-06-12<br>
+  Source of truth: <span class="text-yellow">buddyarena-growth-proposal.md</span> · Related: mkt-positioning · messaging-framework · social-playbook · marketing-decision-log
+</div>
+
+</body>
+</html>
