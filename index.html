@@ -208,6 +208,7 @@
     <a href="#kpis">KPIs</a>
     <a href="#action">Action Plan</a>
     <a href="#house">House Camps</a>
+    <a href="#arena">Arena</a>
   </div>
   <div class="nav-tag">Draft · Jun 2026</div>
 </nav>
@@ -559,7 +560,7 @@
   <div class="eyebrow">Section 9 · Marketing Features Required From Dev</div>
   <h2>The build list for Duy — <span class="text-yellow">by priority.</span></h2>
   <div class="sp-sm"></div>
-  <p class="lead"><b style="color:#fff">P0 must exist before the Yellow campaign opens.</b> P1 lands during the run. P2 is Phase 2. None needs new infrastructure.</p>
+  <p class="lead"><b style="color:#fff">P0 must exist before the Yellow campaign opens.</b> P1 lands during the run. P2 is Phase 2. None needs new infrastructure. <b class="text-yellow">No ticket builds without three sign-offs: Jeng (business) · Mark (product owner) · Duy (feasibility)</b> — Mark validates each ticket works from the product side. Sign-off matrix in the workplan §5.</p>
   <div class="sp"></div>
   <p style="font-size:12.5px; color:var(--muted); margin-bottom:14px;"><b style="color:#fff">Click any ticket to open the full spec</b> — user story, why it matters, acceptance criteria, done-when. Same content as workplan §5, copy-paste ready for the tracker.</p>
 
@@ -862,6 +863,44 @@
   <div class="sp-sm"></div>
   <p style="font-size:12.5px; color:var(--muted);"><b style="color:#fff">To go from proposed → live, it needs:</b> a budget + cadence decision (leadership) · first pair choice — major pair (safe) vs. target-token pair (lead-gen play) · an accounting line (marketing spend vs. future commission offset).</p>
   <span class="slide-num">12</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 13. ARENA MODE -->
+<div class="slide" id="arena">
+  <div class="eyebrow">Section 13 · Exploration — Inspired by Cede Arena</div>
+  <h2>Arena mode — <span class="text-yellow">1v1 PnL duels.</span></h2>
+  <div class="sp-sm"></div>
+  <p class="lead">Cede runs a separate product at <b style="color:#fff">app.cedearena.io</b>: "PnL Trading Tournaments. Compete. Win. Be remembered." — 1v1 matches decided by PnL%, ~30-minute matchmaking. Bybit runs the same format (1–4h battles, prizes funded by the exchange as marketing spend). It looks fun because it <i>is</i> fun — the question is the business model.</p>
+  <div class="sp"></div>
+  <div class="g2">
+    <div class="card-hl">
+      <h4 class="text-yellow" style="margin-bottom:8px;">Why it's interesting for us</h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">PnL% = capital size doesn't matter</b> — whale-proof by design, even more than our hourly cap. Opens the door to small traders.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Short matches = instant fun</b> — the most gamified retention surface possible.</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Can run without a B2B partner</b> — pairs with house campaigns on the "shelf is never empty" goal.</span></div>
+        <div class="ti"><div class="td"></div><span>Our architecture already reserved an <b style="color:#fff">"arena PvP" seam</b> — it attaches to the same gateway and trade-ingestion rails.</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h4 style="margin-bottom:8px;">The unknown: how it gets funded</h4>
+      <p style="font-size:12.5px; margin-bottom:10px;">Cede Arena's model isn't public. Three ways this category works elsewhere:</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Sponsor-funded prizes</b> — Bybit's model: marketing spend buys engagement</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Entry stakes + winner takes the pot, platform takes a rake</b> — self-sustaining, but gambling-adjacent → legal review required</span></div>
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Free duels, partner-funded rewards</b> — Trade &amp; Earn economics applied to matches</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="sp-sm"></div>
+  <div class="card" style="border-color:var(--red);">
+    <p style="font-size:12.5px;"><b style="color:var(--red);">Before anyone gets excited:</b> staked 1v1 on PnL needs a legal check in most jurisdictions · 1v1 PnL is gameable (two accounts, opposite positions — needs anti-abuse design) · and our MVP edge is <b style="color:#fff">clean Trade &amp; Earn focus</b> — Cede's product sprawl is the complexity we beat. Arena is <b style="color:#fff">Phase 3+, after the proof exists.</b></p>
+  </div>
+  <div class="sp-sm"></div>
+  <p style="font-size:12.5px; color:var(--muted);"><b style="color:#fff">Next step:</b> run our competitor-research tooling on app.cedearena.io — capture their match flow, stake/entry screens, and how prizes get funded. Decide after we know their model.</p>
+  <span class="slide-num">13</span>
 </div>
 
 <div class="section-divider"></div>
