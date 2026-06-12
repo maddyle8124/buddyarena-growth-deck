@@ -155,6 +155,22 @@
   .beat-t { font-size: 12.5px; font-weight: 700; margin-bottom: 3px; }
   .beat-s { font-size: 10.5px; color: var(--muted); line-height: 1.45; }
 
+  /* TICKETS (expandable) */
+  .tk { background: var(--card); border: 1px solid var(--card-2); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+  .tk[open] { border-color: var(--yellow-border); }
+  .tk summary { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; list-style: none; }
+  .tk summary::-webkit-details-marker { display: none; }
+  .tk-name { font-size: 14px; font-weight: 700; flex: 1; }
+  .tk-meta { font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .tk-chev { color: var(--muted); font-size: 11px; transition: transform .2s; }
+  .tk[open] .tk-chev { transform: rotate(180deg); }
+  .tk-body { padding: 0 16px 16px; border-top: 1px solid var(--card-2); }
+  .tk-story { font-size: 13px; color: var(--white); font-style: italic; padding: 10px 14px; background: var(--yellow-dim); border-left: 3px solid var(--yellow); border-radius: 0 6px 6px 0; margin: 12px 0 10px; line-height: 1.55; }
+  .tk-why { font-size: 12.5px; color: var(--body); margin-bottom: 10px; line-height: 1.55; }
+  .tk-why b { color: var(--orange); }
+  .tk-done { font-size: 12.5px; color: var(--body); margin-top: 10px; }
+  .tk-done b { color: var(--green); }
+
   /* ACTION LIST */
   .act-row { display: grid; grid-template-columns: 34px 1fr 130px 110px; gap: 12px; padding: 13px 18px;
     border-bottom: 1px solid rgba(43,49,57,.6); align-items: center; }
@@ -545,25 +561,167 @@
   <div class="sp-sm"></div>
   <p class="lead"><b style="color:#fff">P0 must exist before the Yellow campaign opens.</b> P1 lands during the run. P2 is Phase 2. None needs new infrastructure.</p>
   <div class="sp"></div>
-  <div class="tbl-card">
-    <table>
-      <tr><th style="width:64px;">Priority</th><th>Feature</th><th>What it does</th><th style="width:96px;">Needed by</th></tr>
-      <tr><td><span class="badge b-red">P0</span></td><td><b>Landing page</b></td><td>Credible first page — Yellow as first client + the live leaderboard. Copy from Maddy.</td><td>Week 0</td></tr>
-      <tr><td><span class="badge b-red">P0</span></td><td><b>API-key guide at connect</b></td><td>Step-by-step Binance screenshots: read-only scope + our fixed IP. The biggest funnel fix.</td><td>Week 0</td></tr>
-      <tr><td><span class="badge b-red">P0</span></td><td><b>"We see your trades" confirmation</b></td><td>At connect: "we're watching your account — trades count from now." Check timing with API team.</td><td>Week 0</td></tr>
-      <tr><td><span class="badge b-red">P0</span></td><td><b>Share card for everyone</b></td><td>Rank + volume + est. prize image for every participant, every round.</td><td>Week 1</td></tr>
-      <tr><td><span class="badge b-yellow">P1</span></td><td><b>Round stats export</b></td><td>Auto-generate each round's numbers — feeds winner posts and the top-10 group callouts.</td><td>Week 1</td></tr>
-      <tr><td><span class="badge b-yellow">P1</span></td><td><b>Watch-live leaderboard link</b></td><td>Public leaderboard, no account needed.</td><td>Week 2</td></tr>
-      <tr><td><span class="badge b-yellow">P1</span></td><td><b>Last-hour bonus</b></td><td>Extra reward for the final hour's top trader. Needs the funding decision first.</td><td>Week 2</td></tr>
-      <tr><td><span class="badge b-muted">P2</span></td><td><b>Referral</b></td><td>~$5–10 each side, paid after the invited user finishes a full round.</td><td>Month 2</td></tr>
-      <tr><td><span class="badge b-muted">P2</span></td><td><b>Cross-campaign bonus</b></td><td>Extra reward for joining 2+ campaigns.</td><td>Month 2</td></tr>
-      <tr><td><span class="badge b-muted">P2</span></td><td><b>Streak bonus</b></td><td>Trade 3+ rounds in a row → small extra multiplier. Rewards the comeback directly.</td><td>Month 2</td></tr>
-      <tr><td><span class="badge b-muted">P2</span></td><td><b>Community milestone pool</b></td><td>Campaign crosses $X total volume → every active trader gets a bonus. Traders recruit traders.</td><td>Month 2–3</td></tr>
-      <tr><td><span class="badge b-muted">P2</span></td><td><b>Partners page</b></td><td>Nav button → two boxes: Trading Competition + Trading Volume Provider.</td><td>Month 2–3</td></tr>
-    </table>
-  </div>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:14px;"><b style="color:#fff">Click any ticket to open the full spec</b> — user story, why it matters, acceptance criteria, done-when. Same content as workplan §5, copy-paste ready for the tracker.</p>
+
+  <details class="tk">
+    <summary><span class="badge b-red">P0</span><span class="tk-name">Landing page</span><span class="tk-meta">Duy build · Maddy copy/visuals · Week 0</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a trader arriving from a partner announcement, I want to understand in 10 seconds what this is and what I can earn, so that I can decide to join without asking anyone.</p>
+      <p class="tk-why"><b>Why it matters:</b> warm partner traffic currently lands on the app with zero context. A visitor who doesn't get it in the first screen closes the tab — and every trader lost here was already paid for by the partner's reach.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Hero explains the mechanic in one sentence ("Trade [PAIR] on [EXCHANGE]. Earn from the $[X] pool by volume.")</span></div>
+        <div class="ti"><div class="td"></div><span>Live campaign card from the API: prize pool, pair, time remaining</span></div>
+        <div class="ti"><div class="td"></div><span>Trust block: "your funds never move" — read-only key, encrypted, fixed IP you can whitelist</span></div>
+        <div class="ti"><div class="td"></div><span>One primary CTA into the join flow; leaderboard visible without login</span></div>
+        <div class="ti"><div class="td"></div><span>All copy in editable slots — final wording swaps in after the brand/language decision</span></div>
+      </div>
+      <p class="tk-done"><b>Done when:</b> a person who's never heard of the product can say what it does and how to earn — without scrolling past the first two screens.</p>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-red">P0</span><span class="tk-name">API-key onboarding — audit first</span><span class="tk-meta">Duy audit + build · Week 0</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a trader who decided to join, I want to create the right read-only key without getting lost in exchange settings, so that I don't give up at the hardest step of onboarding.</p>
+      <p class="tk-why"><b>Why it matters:</b> the API-key step is the single biggest drop-off in this product category — every abandonment is a trader who already wanted in. <b>But the connect flow already exists in the codebase (Jeng)</b> — so this starts with an audit, gap-fill only, possibly zero work.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Step 1 — audit:</b> document what the current flow covers; close with zero build if complete</span></div>
+        <div class="ti"><div class="td"></div><span>Gap-fill only: per-exchange steps with screenshots (Binance first)</span></div>
+        <div class="ti"><div class="td"></div><span>Permission guidance: read-only ON, trade + withdraw OFF</span></div>
+        <div class="ti"><div class="td"></div><span>Our fixed egress IP with a copy button + one line on why whitelisting protects them</span></div>
+        <div class="ti"><div class="td"></div><span>Nice-to-have: server-side scope check warning on over-scoped keys</span></div>
+      </div>
+      <p class="tk-done"><b>Done when:</b> a first-time Binance user creates a correctly-scoped key without leaving the flow or asking in the group.</p>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-red">P0</span><span class="tk-name">"We see your trades" confirmation — validate first</span><span class="tk-meta">Duy audit + build · Week 0</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a trader who just connected and made my first trade, I want the app to show me my trade was counted, so that I trust the system works and keep trading.</p>
+      <p class="tk-why"><b>Why it matters:</b> this is the funnel's silent killer. A trader who trades and sees nothing doesn't file a bug — they assume it's broken and quietly leave. We never find out. <b>Audit first:</b> if the current flow already shows tracking status, close with zero work.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Step 1 — audit:</b> does the current flow surface tracking status after connect? after first fill?</span></div>
+        <div class="ti"><div class="td"></div><span>If missing — connect success state: "We're watching your account — trades on [PAIR] count from now"</span></div>
+        <div class="ti"><div class="td"></div><span>Visible state change on the first detected fill ("First trade counted ✓")</span></div>
+        <div class="ti"><div class="td"></div><span>Honest delay copy: "trades appear within ~X min" — X from the API team</span></div>
+      </div>
+      <p class="tk-done"><b>Done when:</b> in staging — connect a real read-only key, place one small trade, watch the UI confirm it without a refresh.</p>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-red">P0</span><span class="tk-name">Share card for everyone</span><span class="tk-meta">Duy build · Maddy layout · Week 1</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As any participant — not just the winner — I want a shareable image of my rank, volume, and prize each round, so that I have something worth posting even at #12.</p>
+      <p class="tk-why"><b>Why it matters:</b> we have no ad budget — sharing <b>is</b> our acquisition. Winner-only = 1 post per round; everyone = up to 50, each carrying our brand into trader communities we can't reach ourselves.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Auto-generated per participant per round: rank, pair, counted volume, est./final prize, brand + link</span></div>
+        <div class="ti"><div class="td"></div><span>Wallet masked (0x607c…a92a style)</span></div>
+        <div class="ti"><div class="td"></div><span>One-click share to X + download; on the campaign page when logged in</span></div>
+        <div class="ti"><div class="td"></div><span>Card wording is a config string — final copy after product sign-off</span></div>
+      </div>
+      <p class="tk-done"><b>Done when:</b> any logged-in participant can produce and post their card in under 10 seconds.</p>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-yellow">P1</span><span class="tk-name">Round stats export</span><span class="tk-meta">Duy build · Maddy consumer · Week 1</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As the marketing owner, I want each round's numbers auto-generated at close, so that the winner post and the top-10 group callout take minutes instead of an hour of asking dev.</p>
+      <p class="tk-why"><b>Why it matters:</b> the whole weekly rhythm — winner posts, top-10 callouts, milestones — runs on round numbers. If they need a dev each week, the cadence dies the first busy week.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>At close: top-10 (masked), total counted volume, payouts, participant count</span></div>
+        <div class="ti"><div class="td"></div><span>Callable mid-round too — a point-in-time snapshot for the midweek callout</span></div>
+        <div class="ti"><div class="td"></div><span>Usable without dev help: text block, CSV, or a simple admin view</span></div>
+      </div>
+      <p class="tk-done"><b>Done when:</b> Maddy produces a complete winner post from a closed round without messaging anyone.</p>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-yellow">P1</span><span class="tk-name">Watch-live leaderboard link</span><span class="tk-meta">Duy · Week 2</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a competing trader, I want a public link to the live leaderboard that opens without an account, so that my friends can watch me compete in real time.</p>
+      <p class="tk-why"><b>Why it matters:</b> "watch me compete live" is a share no competitor offers, and the visitor needs zero commitment — no signup, no key. The SSE leaderboard already exists; this mostly removes the login wall and adds link previews.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Public route, no auth, SSE live updates, masked wallets</span></div>
+        <div class="ti"><div class="td"></div><span>OG meta tags so the link previews properly on X/Telegram</span></div>
+        <div class="ti"><div class="td"></div><span>Small "join this competition" CTA for visitors</span></div>
+      </div>
+      <p class="tk-done"><b>Done when:</b> opened in incognito it updates live; pasted into Telegram it renders a preview card.</p>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-yellow">P1</span><span class="tk-name">Last-hour bonus</span><span class="tk-meta">Duy mechanic · funding = team call · Week 2</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a competing trader, I want an extra reward for topping the final hour, so that the end of every round is worth fighting for.</p>
+      <p class="tk-why"><b>Why it matters:</b> without it, rounds fade out — traders who can't catch the leader stop days early. With it, every Friday ends in a sprint anyone can win regardless of weekly rank. A weekly dramatic moment to post about; no competitor has it.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Final-60-minute window volume tracked separately within the round</span></div>
+        <div class="ti"><div class="td"></div><span>Winner + amount shown at close; "Last-hour bonus: $[X]" visible during the round</span></div>
+        <div class="ti"><div class="td"></div><span>Amount is a config value — the funding decision sets it; the mechanic builds now</span></div>
+      </div>
+      <p class="tk-done"><b>Done when:</b> a test round computes the final-hour winner correctly even when they differ from the overall leader.</p>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-muted">P2</span><span class="tk-name">Referral (full-round gate)</span><span class="tk-meta">Duy · amounts pending · Month 2</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a trader, I want an invite link that pays us both when my friend completes a full round, so that inviting is worth doing and farming isn't.</p>
+      <p class="tk-why"><b>Why it matters:</b> turns existing traders into recruiters at a known, capped cost — the full-round gate means we never pay for a dead signup.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Unique link per wallet · reward released only after the invited user finishes ≥1 full round with counted volume · both sides see pending/earned state</span></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-muted">P2</span><span class="tk-name">Cross-campaign bonus</span><span class="tk-meta">Duy · mechanics pending · Month 2</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a trader who joined an easy-money round, I want a bonus for also joining a partner campaign, so that trying the next one is a no-brainer.</p>
+      <p class="tk-why"><b>Why it matters:</b> this is the bridge that turns cheap acquisition into what clients actually pay for — traders inside funded pools. Strategically the most important P2 ticket.</p>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-muted">P2</span><span class="tk-name">Streak bonus</span><span class="tk-meta">Duy · multiplier pending · Month 2</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a returning trader, I want trading 3+ rounds in a row to earn a small multiplier, so that my loyalty is worth something.</p>
+      <p class="tk-why"><b>Why it matters:</b> retention is our scarcest resource — this rewards exactly the comeback behavior the whole plan depends on.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Streak counter visible · resets on a missed round · multiplier size = product decision</span></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-muted">P2</span><span class="tk-name">Community milestone pool</span><span class="tk-meta">Duy · threshold pending · Month 2–3</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a participant, I want everyone active to get a bonus when the campaign crosses $X total volume, so that I'm motivated to bring more traders in.</p>
+      <p class="tk-why"><b>Why it matters:</b> flips the competition's zero-sum psychology — more rivals normally means a smaller share, but the milestone makes every new trader good news. Rivals become recruiters.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Progress bar on the campaign page ("$3.2M / $5M — everyone wins at $5M")</span></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="tk">
+    <summary><span class="badge b-muted">P2</span><span class="tk-name">Partners page</span><span class="tk-meta">Duy build · Maddy copy · leadership sign-off · Month 2–3</span><span class="tk-chev">▼</span></summary>
+    <div class="tk-body">
+      <p class="tk-story">As a token-project lead, I want a page explaining the two services, so that I can request a campaign without booking a call first.</p>
+      <p class="tk-why"><b>Why it matters:</b> today B2B intake only works through warm intros; this page makes inbound possible once the case study circulates.</p>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Two boxes: Trading Competition · Trading Volume Provider + contact CTA</span></div>
+        <div class="ti"><div class="td"></div><span>Volume-provider copy states the compliance line out loud: disclosed market-making, fully separate from competition leaderboards</span></div>
+      </div>
+    </div>
+  </details>
+
   <div class="sp-sm"></div>
-  <p style="font-size:12.5px; color:var(--muted);">Each row here is a <b style="color:#fff">full dev ticket in the workplan §5</b> — user story, why it matters, acceptance criteria, definition of done, dependencies. Copy-paste ready for the tracker. (Removed: Telegram DM nudges — the top-10 callout is one public post in the community group, powered by the round-stats export.)</p>
+  <p style="font-size:12px; color:var(--muted);">Removed from the list: Telegram DM nudges — the top-10 callout is one public post in the community group, powered by the round-stats export.</p>
   <span class="slide-num">09</span>
 </div>
 
