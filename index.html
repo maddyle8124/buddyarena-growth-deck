@@ -594,6 +594,7 @@
   <div class="tbl-card">
     <table>
       <tr><th>Open decision</th><th>Our lean</th><th>Owner</th></tr>
+      <tr><td><b>Brand name + language</b> <span class="badge b-yellow">blocker</span></td><td>Wait on Yellow Capital agreements — draft everything with [BRAND] placeholders meanwhile</td><td>Leadership + Yellow</td></tr>
       <tr><td><b>Pool size</b> <span class="badge b-yellow">blocker</span></td><td>Push $2K → $5–10K — a condition for launch, not a wish</td><td>BD → Yellow</td></tr>
       <tr><td><b>Yellow's pace</b> <span class="badge b-yellow">blocker</span></td><td>Hard yes/no date; if missed → Aster or a small self-funded pilot</td><td>BD lead</td></tr>
       <tr><td><b>Last-hour bonus money</b></td><td>~10% from the main pool (simplest)</td><td>Us + Yellow</td></tr>
@@ -608,36 +609,54 @@
 
 <!-- 11. ACTION PLAN -->
 <div class="slide" id="action">
-  <div class="eyebrow">Section 11 · Action Plan — Time-Bound</div>
+  <div class="eyebrow">Section 11 · Action Plan — By Department</div>
   <h2>MVP done by <span class="text-yellow">June 30.</span></h2>
   <div class="sp-sm"></div>
-  <p class="lead">Matches Duy's committed dev schedule: core features this week → marketing features next week → deploy &amp; test the final week. Build is decoupled from launch — the campaign fires the moment Yellow signs the pool. <b style="color:#fff">Full scope lives in the workplan</b> (<span class="text-yellow">buddyarena-mvp-workplan.md</span>): the start-now list, the stakeholder-gated list with what each decision unblocks, and a user story per feature.</p>
+  <p class="lead">All dev features within <b style="color:#fff">2 weeks (by Jun 26, per Jeng)</b>; Jun 27–30 = test + dry-run. The rule: <b style="color:#fff">brand name, language &amp; positioning wait on Yellow Capital agreements</b> — so everything is drafted now with [BRAND] placeholders, and finalizing is a fast swap. Full scope + user stories: <span class="text-yellow">buddyarena-mvp-workplan.md</span>.</p>
   <div class="sp"></div>
 
-  <h4 style="margin-bottom:8px;"><span class="badge b-red">Now → Sun Jun 14</span> &nbsp;Decide &amp; hand off</h4>
-  <div class="tbl-card" style="margin-bottom:18px;">
-    <div class="act-row"><div class="act-num">1</div><div><div class="act-t">Hand Duy the P0 build list</div><div class="act-s">Landing page · API-key guide · trade confirmation · share card (§9). Today.</div></div><div class="act-owner">Maddy</div><span class="badge b-red">Jun 12</span></div>
-    <div class="act-row"><div class="act-num">2</div><div><div class="act-t">Lock pool size with Yellow</div><div class="act-s">$2K → $5–10K, with a hard yes/no date. The launch gate.</div></div><div class="act-owner">BD lead</div><span class="badge b-red">by Jun 14</span></div>
-    <div class="act-row"><div class="act-num">3</div><div><div class="act-t">Set the volume target with Yellow</div><div class="act-s">What number makes the case study credible? Pool size works back from it.</div></div><div class="act-owner">BD + Maddy</div><span class="badge b-red">by Jun 14</span></div>
-    <div class="act-row"><div class="act-num">4</div><div><div class="act-t">Decide last-hour bonus funding</div><div class="act-s">~10% of pool vs. extra from Yellow — Duy builds it next week, decide first.</div></div><div class="act-owner">Team call</div><span class="badge b-red">by Jun 14</span></div>
-    <div class="act-row"><div class="act-num">5</div><div><div class="act-t">File exchange affiliate applications</div><div class="act-s">Binance + Bybit — approval takes time, the clock starts now.</div></div><div class="act-owner">BD / ops</div><span class="badge b-red">by Jun 14</span></div>
+  <div class="g2" style="align-items:start;">
+    <div class="card-hl">
+      <div class="ch-num">Developer side · Duy</div>
+      <h4 style="margin-bottom:8px;"><span class="badge b-green">Start now — independent</span></h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span><b style="color:#fff">Audit the existing onboarding flow first</b> — connect flow already exists; F2 (key guide) + F3 (trade confirmation) are gap-fill only</span></div>
+        <div class="ti"><div class="td"></div><span>Landing page build — placeholder copy slots</span></div>
+        <div class="ti"><div class="td"></div><span>Share card · round stats export · public watch-live leaderboard</span></div>
+        <div class="ti"><div class="td"></div><span>Last-hour bonus mechanic — amount as a config value</span></div>
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--card-2);">
+      <h4 style="margin-bottom:8px;"><span class="badge b-muted">Waiting on agreements</span></h4>
+      <div class="tl">
+        <div class="ti"><div class="td" style="background:var(--muted);"></div><span>Yellow campaign config (pool · pair · dates)</span></div>
+        <div class="ti"><div class="td" style="background:var(--muted);"></div><span>Final copy/brand injection (name + language)</span></div>
+        <div class="ti"><div class="td" style="background:var(--muted);"></div><span>P2 builds (referral, streak, milestone — numbers pending)</span></div>
+      </div>
+      </div>
+    </div>
+    <div class="card-hl">
+      <div class="ch-num">Marketing side · Maddy</div>
+      <h4 style="margin-bottom:8px;"><span class="badge b-green">Start now — independent</span></h4>
+      <div class="tl">
+        <div class="ti"><div class="td"></div><span>Draft ALL copy with [BRAND] placeholders, English first — landing, explainer, templates, kit, 2 weeks of posts</span></div>
+        <div class="ti"><div class="td"></div><span>Visual/brand audit + share-card layout</span></div>
+        <div class="ti"><div class="td"></div><span>Channel prep — bios + pinned drafts + handle shortlist per name candidate</span></div>
+        <div class="ti"><div class="td"></div><span>Community ops plan · case-study template · walk the product as a user</span></div>
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--card-2);">
+      <h4 style="margin-bottom:8px;"><span class="badge b-muted">Waiting on agreements</span></h4>
+      <div class="tl">
+        <div class="ti"><div class="td" style="background:var(--muted);"></div><span>Register handles + go live (needs the brand name)</span></div>
+        <div class="ti"><div class="td" style="background:var(--muted);"></div><span>Finalize all copy (name + language locked)</span></div>
+        <div class="ti"><div class="td" style="background:var(--muted);"></div><span>Send the Yellow.Pro kit (needs campaign terms)</span></div>
+      </div>
+      </div>
+    </div>
   </div>
-
-  <h4 style="margin-bottom:8px;"><span class="badge b-yellow">Mon Jun 15 → Sun Jun 21</span> &nbsp;Build week</h4>
-  <div class="tbl-card" style="margin-bottom:18px;">
-    <div class="act-row"><div class="act-num">6</div><div><div class="act-t">P0 features built</div><div class="act-s">Landing page · API-key guide · "we see your trades" · share card.</div></div><div class="act-owner">Duy</div><span class="badge b-yellow">Jun 15–21</span></div>
-    <div class="act-row"><div class="act-num">7</div><div><div class="act-t">Landing page copy → Duy, section by section</div><div class="act-s">Hero, how-it-works, trust block, B2B block.</div></div><div class="act-owner">Maddy</div><span class="badge b-yellow">Jun 15–18</span></div>
-    <div class="act-row"><div class="act-num">8</div><div><div class="act-t">Channels live</div><div class="act-s">X + Telegram announce channel + community group, pinned posts ready.</div></div><div class="act-owner">Maddy</div><span class="badge b-yellow">by Jun 18</span></div>
-    <div class="act-row"><div class="act-num">9</div><div><div class="act-t">Yellow.Pro announcement kit drafted</div><div class="act-s">Their post + our follow-up sequence, filled in.</div></div><div class="act-owner">Maddy</div><span class="badge b-yellow">by Jun 21</span></div>
-    <div class="act-row"><div class="act-num">10</div><div><div class="act-t">Aster: the two questions answered</div><div class="act-s">CEX-listed? Community size? Decides the Phase-2 campaign.</div></div><div class="act-owner">BD (Aster)</div><span class="badge b-yellow">by Jun 21</span></div>
-  </div>
-
-  <h4 style="margin-bottom:8px;"><span class="badge b-green">Mon Jun 22 → Sun Jun 28</span> &nbsp;Deploy, test, dry-run</h4>
-  <div class="tbl-card" style="margin-bottom:18px;">
-    <div class="act-row"><div class="act-num">11</div><div><div class="act-t">Deploy + end-to-end test</div><div class="act-s">Connect a real account → trade → counted → on the live leaderboard → share card generates.</div></div><div class="act-owner">Duy + Maddy</div><span class="badge b-green">Jun 22–25</span></div>
-    <div class="act-row"><div class="act-num">12</div><div><div class="act-t">P1 features built</div><div class="act-s">Round stats export · watch-live leaderboard link · last-hour bonus.</div></div><div class="act-owner">Duy</div><span class="badge b-green">Jun 22–26</span></div>
-    <div class="act-row"><div class="act-num">13</div><div><div class="act-t">Internal dry-run round</div><div class="act-s">Tiny test pool, whole team trades — surfaces what real traders would hit.</div></div><div class="act-owner">Everyone</div><span class="badge b-green">Jun 26–28</span></div>
-    <div class="act-row"><div class="act-num">14</div><div><div class="act-t">Content bank ready</div><div class="act-s">Launch thread · mid-round template · winner template · "how your prize is calculated."</div></div><div class="act-owner">Maddy</div><span class="badge b-green">by Jun 28</span></div>
+  <div class="sp-sm"></div>
+  <div class="card" style="border-color:var(--orange);">
+    <h4 style="margin-bottom:8px; color:var(--orange);">BD / leadership — the unblockers (every row converts "waiting" into "go")</h4>
+    <p style="font-size:12.5px;">Lock pool + pair + dates + cross-promo with Yellow <span class="badge b-red">by Jun 14</span> &nbsp;·&nbsp; <b style="color:#fff">Brand name + language decision</b> <span class="badge b-red">ASAP — gates the most tasks</span> &nbsp;·&nbsp; bonus funding call <span class="badge b-red">by Jun 14</span> &nbsp;·&nbsp; file affiliate applications <span class="badge b-yellow">this week</span> &nbsp;·&nbsp; ask Aster the two questions <span class="badge b-yellow">next week</span></p>
   </div>
 
   <div class="card-y">
